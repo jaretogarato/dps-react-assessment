@@ -22,39 +22,21 @@ class Beers extends Component {
 
     if(loaded){
       let listLength = this.state.beers.length;
-      let beerNameArr = [];
+      // let beerNameArr = [];
+      // let beerDescArr = [];
+      let beerArr = [];
 
       for(let i=0; i<listLength; i++){
         let beer = this.state.beers[i];
         console.log(beer.name);
-        beerNameArr[i] = beer.name;
+        beerArr[i] = beer;
+        // beerNameArr[i] = beer.name;
+        // beerDescArr[i] = beer.description;
         // if(beer.hasOwnProperty(name)) {
         //   let beerName = beer.name;
         //   console.log(beerName);
         // }
       }
-
-      // return (
-      //   <Segment basic>
-      //     <Segment basic textAlign='center'>
-      //       <Header as='h1' style={styles.header}>Beers Beers Beers</Header>
-      //     </Segment>
-      //     <Grid>
-      //       <Grid.Column computer={8} tablet={8} mobile={16}>
-      //         <Segment inverted>
-      //           <Header
-      //             as='h1'
-      //             textAlign='center'
-      //             style={styles.header}>
-      //               50 First Beers
-      //           </Header>
-      //           <Divider />
-      //           <Header>Beers header</Header>
-      //         </Segment>
-      //       </Grid.Column>
-      //     </Grid>
-      //   </Segment>
-      // )
 
       return(
         <Container>
@@ -63,19 +45,18 @@ class Beers extends Component {
             <Grid.Row>
               <Grid.Column width={16}>
                 <Card.Group>
-                  { beerNameArr.map( beerName => {
+                  { beerArr.map( beer => {
                     return(
                       <Card>
                         <Image src='https://ichef.bbci.co.uk/images/ic/720x405/p047z06c.jpg' />
                         <Card.Content>
-                          <Card.Header
-                            textAlign='center'
-                            style={styles.header4}
-                          >
-                            { beerName }
+                          <Card.Header textAlign='center' style={styles.header4}>
+                            { beer.name }
                           </Card.Header>
                           <Card.Meta>Beer meta</Card.Meta>
-                          <Card.Description>Beer description</Card.Description>
+                          <Card.Description>
+                            { beer.description }
+                          </Card.Description>
                         </Card.Content>
                       </Card>
                     )
@@ -112,6 +93,10 @@ const styles = {
   },
   header4: {
     color: '#333',
+  },
+  beerDesc: {
+
+    lineHeight: 5,
   }
 }
 
