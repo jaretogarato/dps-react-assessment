@@ -10,7 +10,7 @@ class Home extends Component {
   componentDidMount() {
     axios.get('/api/assignment_details')
       .then(res => {
-        this.setState({ assignmentMarkdown: res.data.file })
+        this.setState({ assignmentMarkdown: res.data.file });
       })
       .catch( error => {
         console.log(error.response);
