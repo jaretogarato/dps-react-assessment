@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Segment, Divider, Grid, Image } from 'semantic-ui-react';
+import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
 
 
 class Beers extends Component {
@@ -22,11 +22,6 @@ class Beers extends Component {
 
     if(loaded){
       let listLength = this.state.beers.length;
-      // let beerZero = this.state.beers[0];
-      // let beerZeroName = beerZero.name;
-      // console.log(`Beer Zero: ${beerZero}`)
-      // console.log(`beer Zero Name: ${beerZeroName}`)
-
       let beerNameArr = [];
 
       for(let i=0; i<listLength; i++){
@@ -39,18 +34,58 @@ class Beers extends Component {
         // }
       }
 
-      return beerNameArr.map( beerName => {
-        return(
-          <div>
-            <Header
-              textAlign='center'
-              style={styles.header4}
-            >
-              { beerName }
-            </Header>
-          </div>
-        )
-      })
+      // return (
+      //   <Segment basic>
+      //     <Segment basic textAlign='center'>
+      //       <Header as='h1' style={styles.header}>Beers Beers Beers</Header>
+      //     </Segment>
+      //     <Grid>
+      //       <Grid.Column computer={8} tablet={8} mobile={16}>
+      //         <Segment inverted>
+      //           <Header
+      //             as='h1'
+      //             textAlign='center'
+      //             style={styles.header}>
+      //               50 First Beers
+      //           </Header>
+      //           <Divider />
+      //           <Header>Beers header</Header>
+      //         </Segment>
+      //       </Grid.Column>
+      //     </Grid>
+      //   </Segment>
+      // )
+
+      return(
+        <Container>
+          <Header style={styles.header} >Beers Beers Beers</Header>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Card.Group>
+                  { beerNameArr.map( beerName => {
+                    return(
+                      <Card>
+                        <Image src='https://ichef.bbci.co.uk/images/ic/720x405/p047z06c.jpg' />
+                        <Card.Content>
+                          <Card.Header
+                            textAlign='center'
+                            style={styles.header4}
+                          >
+                            { beerName }
+                          </Card.Header>
+                          <Card.Meta>Beer meta</Card.Meta>
+                          <Card.Description>Beer description</Card.Description>
+                        </Card.Content>
+                      </Card>
+                    )
+                  }) }
+                </Card.Group>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      )
     } else {
       return(
         <div>
@@ -58,35 +93,6 @@ class Beers extends Component {
         </div>
       )
     }
-
-    // console.log(beerZeroName);
-    // let beerNameArr = [];
-    // console.log(listLength);
-    // for (let i = 0; i < 50; i++){
-    //   beerNameArr[i] = this.state.beers
-    // }
-
-    return (
-      <Segment basic>
-        <Segment basic textAlign='center'>
-          <Header as='h1' style={styles.header}>Beers Beers Beers</Header>
-        </Segment>
-        <Grid>
-          <Grid.Column computer={8} tablet={8} mobile={16}>
-            <Segment inverted>
-              <Header
-                as='h1'
-                textAlign='center'
-                style={styles.header}>
-                  50 First Beers
-              </Header>
-              <Divider />
-              <Header>Beers header</Header>
-            </Segment>
-          </Grid.Column>
-        </Grid>
-      </Segment>
-    )
   }
 }
 
@@ -105,7 +111,7 @@ const styles = {
     color: '#FFFFFF',
   },
   header4: {
-    color: '#FFFFFF',
+    color: '#333',
   }
 }
 
