@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
-
+import LinesEllipsis from 'react-lines-ellipsis';
 
 class Beers extends Component {
   state = { beers: [], isLoaded: false };
@@ -40,7 +40,7 @@ class Beers extends Component {
 
       return(
         <Container>
-          <Header style={styles.header} >Beers Beers Beers</Header>
+          <Header style={styles.header} >Tasty Beers</Header>
           <Grid>
             <Grid.Row>
               <Grid.Column width={16}>
@@ -55,7 +55,14 @@ class Beers extends Component {
                           </Card.Header>
                           <Card.Meta>Beer meta</Card.Meta>
                           <Card.Description>
-                            { beer.description }
+
+                            <LinesEllipsis
+                              text={ beer.description }
+                              maxLine='8'
+                              ellipsis='...'
+                              trimRight
+                              basedOn='letters'
+                            />
                           </Card.Description>
                         </Card.Content>
                       </Card>
@@ -78,15 +85,13 @@ class Beers extends Component {
 }
 
 const styles = {
-  iframe: {
-    width: '100%',
-    height: '100vh',
-  },
   centered: {
     margin: '0 auto',
   },
   header: {
-    color: '#2ecc40',
+    color: '#DDD',
+    fontSize: 32,
+    paddingTop: 15,
   },
   H4: {
     color: '#FFFFFF',
