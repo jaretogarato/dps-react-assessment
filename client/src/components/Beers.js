@@ -22,16 +22,25 @@ class Beers extends Component {
 
     if(loaded){
       let listLength = this.state.beers.length;
-      // let beerNameArr = [];
-      // let beerDescArr = [];
       let beerArr = [];
+      let randomBeerPic = "";
+      let beerImages = [
+        "http://cdn0.wideopencountry.com/wp-content/uploads/2017/04/beer-793x526.jpg",
+        "https://ichef.bbci.co.uk/images/ic/720x405/p047z06c.jpg",
+        "https://cdn.static-economist.com/sites/default/files/images/2017/07/articles/main/20170708_wbp502.jpg",
+        "https://www.maxim.com/.image/t_share/MTQ2ODUxNjY1ODIyMDk4OTgw/two-pints-beer-main.jpg",
+        "http://texasbeerbus.com/wp-content/uploads/2016/06/bar-1-1.jpg",
+        "http://johnyskystories.com/uploads/attachments/20170428213423_beer-main_0.jpg",
+        "http://www.drinkstuff.com/productimg/65868.jpg",
+        "http://mediad.publicbroadcasting.net/p/krcu/files/201604/beer_10.jpg",
+        "http://pngimg.com/uploads/beer/beer_PNG2388.png?i=1"
+      ]
 
       for(let i=0; i<listLength; i++){
         let beer = this.state.beers[i];
-        console.log(beer.name);
+        // console.log(beer.name);
         beerArr[i] = beer;
-        // beerNameArr[i] = beer.name;
-        // beerDescArr[i] = beer.description;
+        // console.log(beer.style.name);
         // if(beer.hasOwnProperty(name)) {
         //   let beerName = beer.name;
         //   console.log(beerName);
@@ -48,14 +57,14 @@ class Beers extends Component {
                   { beerArr.map( beer => {
                     return(
                       <Card>
-                        <Image src='https://ichef.bbci.co.uk/images/ic/720x405/p047z06c.jpg' />
+                        {/* { console.log(randomBeerPic) } */}
+                        <Image src={ randomBeerPic = beerImages[Math.floor(Math.random() * beerImages.length)] } />
                         <Card.Content>
                           <Card.Header textAlign='center' style={styles.header4}>
                             { beer.name }
                           </Card.Header>
-                          <Card.Meta>Beer meta</Card.Meta>
+                          <Card.Meta>{ beer.style.name }</Card.Meta>
                           <Card.Description>
-
                             <LinesEllipsis
                               text={ beer.description }
                               maxLine='8'

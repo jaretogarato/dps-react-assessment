@@ -27,7 +27,7 @@ class App extends Component {
 
 const styles = {
   background: {
-    backgroundColor: 'black',
+    backgroundColor: '#454545',
   },
 }
 
