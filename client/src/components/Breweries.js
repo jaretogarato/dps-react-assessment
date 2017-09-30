@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getBreweries } from '../actions/breweries';
 import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
@@ -9,17 +9,21 @@ import LinesEllipsis from 'react-lines-ellipsis';
 class Breweries extends Component {
   state = { category: '' }; // first 2 will be arrays of objects
 
-  componentDidMount() {
-    this.props.dispatch(getBreweries(this.setLoaded))
-  }
-
-  setLoaded = () => {
-    this.setState({ loaded: true });
-  }
+  // componentDidMount() {
+  //   this.props.dispatch(getBreweries(this.setLoaded))
+  // }
+  //
+  // setLoaded = () => {
+  //   this.setState({ loaded: true });
+  // }
 
   breweries = () => {
-    const breweries = this.props;
-    console.log(`breweries: ${breweries}`);
+    console.log(this.props);
+    // const { breweries } = this.props;
+    // console.log(`breweries: ${breweries}`);
+    // let entries = breweries[entries];
+    // console.log(`entries: ${ entries }`);
+
     // const { category } = this.state;
     // let visible = breweries;
     // if(category)
@@ -190,9 +194,9 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const breweries = state.breweries;
-  const loaded = state.loaded;
+  // const loaded = state.loaded;
   // const categories = [ ...new Set(brewerys.map(brewery => brewery.category))]
-  return { breweries, loaded };
+  return { breweries };
 }
 
 export default connect(mapStateToProps)(Breweries);

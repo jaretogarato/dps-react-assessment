@@ -8,7 +8,15 @@ export const getBreweries = (callback) => {
   // this is a thunk:
   return(dispatch) => {
     axios.get('/api/all_breweries')
-      .then( res => dispatch({ type: 'BREWERIES', breweries: res.data.entries }))
+      .then( res => dispatch({ type: 'BREWERIES', breweries: res.data }))
+      // .then( res => { debugger })
+      // .then(res => {
+      //   this.setState({
+      //     breweries: res.data.entries, // this is an array
+      //     breweryImages:res.data.entries.images, // this is an object
+      //   });
+      // })
+      // .then( res => { console.log(breweries)} )
       .then( callback() )
   }
 }

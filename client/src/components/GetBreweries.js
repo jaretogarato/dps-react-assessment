@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
 // import axios from 'axios';
@@ -9,7 +9,7 @@ import { Container, Header, Segment, Divider,
 import LinesEllipsis from 'react-lines-ellipsis';
 
 class GetBreweries extends React.Component {
-  state = { loaded: false }; // first 2 will be arrays of objects
+  state = { loaded: false };
 
   componentDidMount() {
     this.props.dispatch(getBreweries(this.setLoaded))
@@ -33,7 +33,6 @@ class GetBreweries extends React.Component {
           <h1> In Main Return in GetBreweries </h1>
           <h1> --------- </h1>
           <Route exact path="/breweries" component={Breweries} />
-          {/* ^^^ should this be "/breweries"? XXX */}
           {/* <Route exact path="/brewery/:name" component={Breweries} /> */}
         </div>
       )
@@ -89,12 +88,12 @@ const styles = {
   }
 }
 
-const mapStateToProps = (state) => {
-  const breweries = state.breweries;
-  // const loaded = state.loaded;
-  // const categories = [ ...new Set(apps.map(app => app.category))]
-  return { breweries };
-}
+// const mapStateToProps = (state) => {
+//   const breweries = state.breweries;
+//   // const loaded = state.loaded;
+//   // const categories = [ ...new Set(apps.map(app => app.category))]
+//   return { breweries };
+// }
 
-export default connect(mapStateToProps)(Breweries);
-// export default connect()(GetBreweries);
+// export default connect(mapStateToProps)(GetBreweries);
+export default connect()(GetBreweries);
