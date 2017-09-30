@@ -7,7 +7,7 @@ import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic
 import LinesEllipsis from 'react-lines-ellipsis';
 
 class Breweries extends Component {
-  state = { category: '' }; // first 2 will be arrays of objects
+  state = { is_organic: '' };
 
   // componentDidMount() {
   //   this.props.dispatch(getBreweries(this.setLoaded))
@@ -19,38 +19,49 @@ class Breweries extends Component {
 
   breweries = () => {
     console.log(this.props);
-    // const { breweries } = this.props;
-    // console.log(`breweries: ${breweries}`);
-    // let entries = breweries[entries];
-    // console.log(`entries: ${ entries }`);
+    const { breweriesParent } = this.props;
+    const { is_organic } = this.state;
+    console.log(`breweriesParent: ${breweriesParent}`);
 
-    // const { category } = this.state;
-    // let visible = breweries;
-    // if(category)
-    //   visible = breweries.filter( brewery => brewery.category === category)
+    let breweries = [];
+    breweries = breweriesParent.entries;
+    console.log(`breweries: ${ breweries }`);
 
-    // return breweries.map( brewery => {
-    //   return(
-    //     <Grid.Column key={brewery.id} computer={4} mobile={16} tablet={16}>
-    //       <Card style={styles.breweryCard}>
-    //         {/* <Image fluid={true} src={brewery.logo} /> */}
-    //         <Card.Content>
-    //           <Card.Header>{brewery.name}</Card.Header>
-    //           <Card.Meta>
-    //             <span>Author: {brewery.author}</span>
-    //             <span>Category: {brewery.category}</span>
-    //           </Card.Meta>
-    //           <Card.Description style={styles.breweryDesc}>
-    //             {brewery.description}
-    //           </Card.Description>
-    //         </Card.Content>
-    //         <Card.Content extra>
-    //           <Link to={`/all_breweries/${brewery.id}`}>View Brewery</Link>
-    //         </Card.Content>
-    //       </Card>
-    //     </Grid.Column>
-    //   )
-    // })
+    let visible = breweries;
+
+    // if(is_organic)
+    //   visible = breweries.filter( brewery => brewery.is_organic === is_organic)
+
+    // visible = breweries.filter( brewery => brewery.is_organic === brewery.is_organic)
+
+    // for(let key in entries) {
+    // if(entries.hasOwnProperty(key)) {
+    //     var brewery = entries[key];
+    //     console.log(brewery);
+    //   }
+    // }
+
+    return visible.map( brewery => {
+      return(
+        <Grid.Column key={brewery.id} computer={4} mobile={16} tablet={16}>
+          <Card style={styles.breweryCard}>
+            {/* <Image fluid={true} src={brewery.logo} /> */}
+            <Card.Content>
+              <Card.Header>{brewery.name}</Card.Header>
+              <Card.Meta>
+                <span>some stuff</span>
+              </Card.Meta>
+              <Card.Description style={styles.breweryDesc}>
+                {brewery.description}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <Link to={`/all_breweries/${brewery.id}`}>View Brewery</Link>
+            </Card.Content>
+          </Card>
+        </Grid.Column>
+      )
+    })
   }
 
   render() {
