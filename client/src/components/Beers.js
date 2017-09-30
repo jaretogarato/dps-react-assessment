@@ -4,13 +4,13 @@ import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic
 import LinesEllipsis from 'react-lines-ellipsis';
 
 class Beers extends Component {
-  state = { beers: [], isLoaded: false };
+  state = { beers: [], loaded: false };
 
   componentDidMount() {
     axios.get('/api/all_beers')
       .then(res => {
         // console.log(res.data.entries);
-        this.setState({ beers: res.data.entries, isLoaded: true });
+        this.setState({ beers: res.data.entries, loaded: true });
       })
       .catch( error => {
         console.log(error.response);
@@ -18,7 +18,7 @@ class Beers extends Component {
   };
 
   render(){
-    let loaded = this.state.isLoaded;
+    let loaded = this.state.loaded;
 
     if(loaded){
       let listLength = this.state.beers.length;
