@@ -4,13 +4,18 @@ import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic
 import LinesEllipsis from 'react-lines-ellipsis';
 
 class Breweries extends Component {
-  state = { breweries: [], isLoaded: false };
+  state = { breweries: [], breweryImages: {}, isLoaded: false }; // first will be array of objects
 
   componentDidMount() {
     axios.get('/api/all_breweries')
       .then(res => {
         // console.log(res.data.entries);
-        this.setState({ breweries: res.data.entries, isLoaded: true });
+        this.setState({
+          // vvvvvvv vvvvvvv vvvvvvv vvvvvvv vvvvv
+          breweries: res.data.entries, // this is an array
+          breweryImages:res.data.entries.images, // this is an object
+          isLoaded: true });
+          // ^^^^^^^^^^^^^ ^^^^^^^^^^ ^^^^^^^^^^^^^
       })
       .catch( error => {
         console.log(error.response);
@@ -22,44 +27,58 @@ class Breweries extends Component {
 
     if(loaded){
       let listLength = this.state.breweries.length;
-      let breweriesArr = [];
-      let randomBeerPic = "";
-      let breweryImages = [
-        "http://cdn0.wideopencountry.com/wp-content/uploads/2017/04/beer-793x526.jpg",
-        "https://ichef.bbci.co.uk/images/ic/720x405/p047z06c.jpg",
-        "https://cdn.static-economist.com/sites/default/files/images/2017/07/articles/main/20170708_wbp502.jpg",
-        "https://www.maxim.com/.image/t_share/MTQ2ODUxNjY1ODIyMDk4OTgw/two-pints-beer-main.jpg",
-        "http://texasbeerbus.com/wp-content/uploads/2016/06/bar-1-1.jpg",
-        "http://johnyskystories.com/uploads/attachments/20170428213423_beer-main_0.jpg",
-        "http://www.drinkstuff.com/productimg/65868.jpg",
-        "http://mediad.publicbroadcasting.net/p/krcu/files/201604/beer_10.jpg",
-        "http://pngimg.com/uploads/beer/beer_PNG2388.png?i=1"
-      ]
+
+      let breweriesArr = []; // will be array of objects
+      let breweryImageArr = []; // will be array of objects?
+      let breweryImageMed = ""; // will be a url
 
       for(let i=0; i<listLength; i++){
-        let brewery = this.state.breweries[i];
-        // console.log(brewery.name);
-        breweriesArr[i] = brewery;
-        // console.log(brewery.style.name);
+        let brewery = this.state.breweries[i]; // gets big fat brewery object
+        breweriesArr[i] = brewery; // puts big fat object in array
+        // console.log(brewery);
+
+        let breweryImages = this.state.breweries[i].images; // should get an object
+        console.log('vvv this.state.breweries[i].images vvv');
+        console.log(this.state.breweries[i].images ); // yep, got the object
+        breweryImageArr[i] = breweryImages;
+        console.log(`Brewery Image From Array: ${breweryImages.medium}`) // fuggyeah
+        console.log(`Brewery Image From Array II: ${breweryImageArr[i].medium}`) // fuggyeah
+
         // if(brewery.hasOwnProperty(name)) {
         //   let breweryName = brewery.name;
-        //   console.log(breweryName);
         // }
       }
+      console.log('what is breweryImageArr now?');
+      console.log(breweryImageArr); // an array of objects at this point.
+
+      this.setState({ breweries: breweriesArr, breweryImages: breweryImageArr });
+
+      console.log('do i have a breweries?');
+      console.log(this.state.breweries); // yep, as expected, and array of objects
+      console.log('do ia have a breweryImages?')
+      console.log(this.state.breweryImages); // nope
 
       return(
         <Container>
-          <Header style={styles.header} >Exceptional Breweries</Header>
+          <Header style={styles.header}> Exceptional Breweries </Header>
           <Grid>
             <Grid.Row>
               <Grid.Column width={16}>
                 <Card.Group>
-                  { breweriesArr.map( brewery => {
+
+                  {/* var list = [ 'h', 'e', 'l', 'l', 'o'];
+                  list.map((currElement, index) => {
+                    console.log("The current iteration is: " + index);
+                    console.log("The current element is: " + currElement);
+                    console.log("\n");
+                    return 'X';
+                  }); */}
+
+                  { breweriesArr.map(( brewery, index ) => {
                     return(
                       <Card>
-                        {/* { console.log(randomBeerPic) } */}
-                        {/* <Image src={ randomBeerPic = breweryImages[Math.floor(Math.random() * breweryImages.length)] } /> */}
-                        <Image src={ brewery.images } />
+                        { console.log( `Brewery image obj ->-> : ${this.state.breweryImages[index]}` ) }
+                        <Image src={ this.state.breweryImageArr[index].medium } />
                         <Card.Content>
                           <Card.Header textAlign='center' style={styles.header4}>
                             { brewery.name }
