@@ -11,9 +11,12 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <Menu pointing>
+        <Menu inverted color='orange' >
           <Link to='/'>
-            <Menu.Item name='home' active={this.activeItem('/')} />
+            <Menu.Item
+              name='Bomber Beers And Breweries' active={this.activeItem('/')}
+              style={styles.navMenuItem}
+             />
           </Link>
           <Link to='/beers'>
             <Menu.Item name='beers' active={this.activeItem('/beers')} />
@@ -30,6 +33,14 @@ class NavBar extends Component {
       </div>
     )
   }
+}
+
+const styles = {
+  navMenuItem: {
+    fontStyle: 'bold',
+    fontWeight: '600',
+    fontSize: '2em',
+  },
 }
 
 export default withRouter(NavBar);

@@ -41,14 +41,13 @@ class Beers extends Component {
               <Card.Description>
                 <LinesEllipsis
                   text={beer.description}
-                  maxLine='8'
+                  maxLine='6'
                   ellipsis='...'
                   trimRight
                   basedOn='letters'
                 />
               </Card.Description>
-              <Card.Meta>
-                <span>something</span>
+              <Card.Meta style={styles.cardMeta}>{ beer.style.name }
               </Card.Meta>
             </Card.Content>
             <Card.Content extra>
@@ -109,7 +108,7 @@ const styles = {
   beerCardHeader: {
     height: '100px',
     padding: '5%',
-    backgroundColor: '#4abddc',
+    backgroundColor: '#59eff4',
     borderRadius: '10px',
     textAlign: 'center',
     verticalAlign: 'middle',
@@ -128,6 +127,9 @@ const styles = {
   beerDesc: {
     height: '200px',
     lineHeight: 1.5,
+  },
+  cardMeta: {
+    color: '#eb2f00',
   },
 }
 

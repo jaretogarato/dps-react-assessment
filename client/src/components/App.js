@@ -9,6 +9,8 @@ import GetBreweries from './GetBreweries';
 import Breweries from './Breweries';
 import { Switch, Route } from 'react-router-dom';
 import { Segment } from 'semantic-ui-react';
+import beerBackground from '../images/beer-background.jpg';
+
 
 class App extends Component {
   render() {
@@ -30,6 +32,9 @@ class App extends Component {
 const styles = {
   background: {
     backgroundColor: '#454545',
+    backgroundImage: `url(${beerBackground})`,
+    flex: 1,
+    resizeMode: 'contain',
   },
 }
 

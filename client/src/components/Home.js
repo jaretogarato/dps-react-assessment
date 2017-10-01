@@ -19,7 +19,7 @@ class Home extends Component {
 
   render() {
     return(
-      <Segment basic>
+      <Segment basic >
         <Segment basic textAlign='center'>
           <Image style={styles.centered} size='tiny' src={dpsLogo} alt='DevPoint Studios Logo' />
           <Header as='h1' style={styles.header}>DevPoint Studios React Assessment</Header>
@@ -63,14 +63,14 @@ class Home extends Component {
 const styles = {
   iframe: {
     width: '100%',
-    height: '100vh'
+    height: '100vh',
   },
   centered: {
     margin: '0 auto',
   },
   header: {
-    color: '#2ecc40'
-  }
+    color: '#2ecc40',
+  },
 }
 
 export default Home;
