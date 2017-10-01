@@ -18,15 +18,16 @@ class Breweries extends Component {
   // }
 
   breweries = () => {
-    console.log(this.props);
+    console.log(this.props); // ok, we've got the data
 
-    const { breweriesParent = {} } = this.props;
-
-
+    const { breweries = {} } = this.props;
+    console.log(`breweriesParent: ${breweries}`);
     const { is_organic } = this.state;
-    console.log(`breweriesParent: ${breweriesParent}`);
 
-    let breweries = breweriesParent.entries || [];  
+
+    //let breweries = breweriesParent.entries || [];
+    // let breweries = this.props;
+
     // breweries = breweriesParent.entries;
     console.log(`breweries: ${ breweries }`);
 
