@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getBreweries } from '../actions/breweries';
+// import { getBreweries } from '../actions/breweries';
 import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
 import LinesEllipsis from 'react-lines-ellipsis';
 
@@ -9,10 +9,8 @@ class Breweries extends Component {
   state = { is_organic: '' };
 
   breweries = () => {
-    // console.log(this.props); // ok, we've got the data
-
     const { breweries = {} } = this.props;
-    // console.log(`breweries: ${breweries}`);
+    console.log(`breweries: ${breweries}`);
     const { is_organic } = this.state;
     //let breweries = breweriesParent.entries || [];
     let visible = breweries;
@@ -22,18 +20,9 @@ class Breweries extends Component {
     //   return (
     //     <Grid.Column computer={8} tablet={16} mobile={16} key={id}>
     // ^^^^^^^^^^^^^^^ from dave's slack
-
     // if(is_organic)
     //   visible = breweries.filter( brewery => brewery.is_organic === is_organic)
-
     // visible = breweries.filter( brewery => brewery.is_organic === brewery.is_organic)
-
-    // for(let key in entries) {
-    // if(entries.hasOwnProperty(key)) {
-    //     var brewery = entries[key];
-    //     console.log(brewery);
-    //   }
-    // }
 
     let ready = [];
     ready = visible.map( function(brewery)
@@ -78,7 +67,7 @@ class Breweries extends Component {
   }
 
   render() {
-    // let { category } = this.state;
+    // let { is_organic } = this.state;
     return(
       <Container>
         <Header as='h1' textAlign='center' style={styles.h1}>Exceptional Breweries</Header>

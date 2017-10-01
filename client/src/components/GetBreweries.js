@@ -18,12 +18,6 @@ class GetBreweries extends React.Component {
     this.setState({ loaded: true });
   }
 
-  // getBreweryImages = () => {
-  //   return this.props.breweries.map( (entries)  => {
-  //     return [entries]
-  //   })
-  // }
-
   render(){
     let { loaded } = this.state;
     if(loaded){

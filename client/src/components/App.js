@@ -3,6 +3,7 @@ import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Flash from './Flash';
 import Home from './Home';
+import GetBeers from './GetBeers';
 import Beers from './Beers';
 import GetBreweries from './GetBreweries';
 import Breweries from './Breweries';
@@ -17,7 +18,7 @@ class App extends Component {
         <Flash />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path='/beers' component={Beers} />
+          <Route path='/beers' component={GetBeers} />
           <Route path='/breweries' component={GetBreweries} />
           <Route component={NoMatch} />
         </Switch>
