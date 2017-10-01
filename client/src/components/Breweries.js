@@ -37,31 +37,24 @@ class Breweries extends Component {
 
     let ready = [];
     ready = visible.map( function(brewery)
-      { if (typeof brewery.images != 'undefined'){
-          console.log('got images'); // no need for second-level check; whenever we get images, we get a square_medium
-          return brewery;
-        } else {
-          brewery['images'] = {"square_medium": "http://surlybrewing.com/content/uploads/2014/09/surly-old-brewery-picture.jpg"};
-          return brewery;
+      { if (typeof brewery.images == 'undefined'){
+          brewery['images'] = {"square_medium": "https://static1.squarespace.com/static/54ee3381e4b09da43c2f9eba/563d5c94e4b040c6b75fb8b7/564b565ce4b0d5cebc06787e/1447777889413/5Rabbit34.jpg?format=500w"};
         }
+      return brewery;
       }
     )
 
     return ready.map( brewery => {
-      // if (typeof brewery.images != 'undefined'){
-      //   console.log('got images'); // no need for second-level check; whenever we get images, we get a square_medium
-      // } else {
-      //   brewery[images] = {"square_medium": "http://surlybrewing.com/content/uploads/2014/09/surly-old-brewery-picture.jpg"};
-      // }
-      // console.log(brewery.images.square_medium);
       let { id, name, description, is_organic, images = {}, website } = brewery;
 
       return(
         <Grid.Column key={brewery.id} computer={4} mobile={16} tablet={16}>
           <Card style={styles.breweryCard}>
-            <Image fluid={true} src={brewery.images.square_medium} />
             <Card.Content>
-              <Card.Header>{brewery.name}</Card.Header>
+              <Card.Header style={styles.breweryCardHeader}>{brewery.name}</Card.Header>
+            </Card.Content>
+            <Image fluid={true} src={brewery.images.square_medium} style={styles.breweryImage} />
+            <Card.Content>
               <Card.Description>
                 <LinesEllipsis
                   text={brewery.description}
@@ -103,46 +96,6 @@ class Breweries extends Component {
       </Container>
     )
   }
-
-
-  //
-  //     return(
-  //       <Container>
-  //         <Header style={styles.header}> Exceptional Breweries </Header>
-  //         <Grid>
-  //           <Grid.Row>
-  //             <Grid.Column width={16}>
-  //               <Card.Group>
-  //                 { breweriesArr.map(( brewery, index ) => {
-  //                   return(
-  //                     <Card>
-  //                       { console.log( `Brewery image obj ->-> : ${this.state.breweryImages[index]}` ) }
-  //                       <Image src={ this.state.breweryImageArr[index].medium } />
-  //                       <Card.Content>
-  //                         <Card.Header textAlign='center' style={styles.header4}>
-  //                           { brewery.name }
-  //                         </Card.Header>
-  //                         <Card.Meta>{ brewery.website }</Card.Meta>
-                          // <Card.Description>
-                          //   <LinesEllipsis
-                          //     text={ brewery.description }
-                          //     maxLine='8'
-                          //     ellipsis='...'
-                          //     trimRight
-                          //     basedOn='letters'
-                          //   />
-  //                         </Card.Description>
-  //                       </Card.Content>
-  //                     </Card>
-  //                   )
-  //                 }) }
-  //               </Card.Group>
-  //             </Grid.Column>
-  //           </Grid.Row>
-  //         </Grid>
-  //       </Container>
-  //     )
-
 }
 
 const styles = {
@@ -167,13 +120,32 @@ const styles = {
     color: '#333',
   },
   breweryCard: {
-    height: '300px',
-    marginBottom: '10px',
+    // height: '600px',
+    marginBottom: '70px',
+  },
+  breweryCardHeader: {
+    height: '100px',
+    padding: '5%',
+    backgroundColor: '#4abddc',
+    borderRadius: '10px',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    color: '#140068',
+    fontSize: '1.5em',
+    position: 'relative',
+    top: '-20%',
+    transform: 'translateY(-20%)',
+  },
+  breweryImage: {
+    height: '200px',
+    // position: 'relative',
+    // top: '50%',
+    // transform: 'translateY(-50%)',
   },
   breweryDesc: {
+    height: '200px',
     lineHeight: 1.5,
-
-  }
+  },
 }
 
 const mapStateToProps = (state) => {
