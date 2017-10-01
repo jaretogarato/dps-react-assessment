@@ -19,7 +19,10 @@ class Breweries extends Component {
 
   breweries = () => {
     console.log(this.props);
-    const { breweriesParent } = this.props;
+
+    const { breweriesParent = {} } = this.props;
+
+
     const { is_organic } = this.state;
     console.log(`breweriesParent: ${breweriesParent}`);
 
@@ -205,9 +208,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const breweries = state.breweries;
-  // const loaded = state.loaded;
-  // const categories = [ ...new Set(brewerys.map(brewery => brewery.category))]
-  return { breweries };
+  const is_organic = [ ...new Set(breweries.map(brewery => brewery.is_organic))]
+  return { breweries, is_organic };
 }
 
 export default connect(mapStateToProps)(Breweries);
