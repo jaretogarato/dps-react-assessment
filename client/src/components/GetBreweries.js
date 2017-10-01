@@ -6,7 +6,6 @@ import Breweries from './Breweries';
 import { getBreweries } from '../actions/breweries';
 import { Container, Header, Segment, Divider,
   Grid, Image, Card, Dimmer, Loader } from 'semantic-ui-react';
-import LinesEllipsis from 'react-lines-ellipsis';
 
 class GetBreweries extends React.Component {
   state = { loaded: false };
@@ -30,8 +29,8 @@ class GetBreweries extends React.Component {
     if(loaded){
       return(
         <div>
-          <h1> In Main Return in GetBreweries </h1>
-          <h1> --------- </h1>
+          {/* <h1> In Main Return in GetBreweries </h1>
+          <h1> --------- </h1> */}
           <Route exact path="/breweries" component={Breweries} />
           {/* <Route exact path="/brewery/:name" component={Breweries} /> */}
         </div>
@@ -68,25 +67,25 @@ class GetBreweries extends React.Component {
   // }
 }
 
-const styles = {
-  centered: {
-    margin: '0 auto',
-  },
-  header: {
-    color: '#DDD',
-    fontSize: 32,
-    paddingTop: 15,
-  },
-  H4: {
-    color: '#FFFFFF',
-  },
-  header4: {
-    color: '#333',
-  },
-  breweryDesc: {
-    lineHeight: 5,
-  }
-}
+// const styles = {
+//   centered: {
+//     margin: '0 auto',
+//   },
+//   header: {
+//     color: '#DDD',
+//     fontSize: 32,
+//     paddingTop: 15,
+//   },
+//   H4: {
+//     color: '#FFFFFF',
+//   },
+//   header4: {
+//     color: '#333',
+//   },
+//   breweryDesc: {
+//     lineHeight: 5,
+//   }
+// }
 
 // const mapStateToProps = (state) => {
 //   const breweries = state.breweries;

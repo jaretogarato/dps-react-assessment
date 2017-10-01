@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { getBreweries } from '../actions/breweries';
 import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
 import LinesEllipsis from 'react-lines-ellipsis';
@@ -9,29 +8,20 @@ import LinesEllipsis from 'react-lines-ellipsis';
 class Breweries extends Component {
   state = { is_organic: '' };
 
-  // componentDidMount() {
-  //   this.props.dispatch(getBreweries(this.setLoaded))
-  // }
-  //
-  // setLoaded = () => {
-  //   this.setState({ loaded: true });
-  // }
-
   breweries = () => {
-    console.log(this.props); // ok, we've got the data
+    // console.log(this.props); // ok, we've got the data
 
     const { breweries = {} } = this.props;
-    console.log(`breweriesParent: ${breweries}`);
+    // console.log(`breweries: ${breweries}`);
     const { is_organic } = this.state;
-
-
     //let breweries = breweriesParent.entries || [];
-    // let breweries = this.props;
-
-    // breweries = breweriesParent.entries;
-    console.log(`breweries: ${ breweries }`);
-
     let visible = breweries;
+
+    // { visible.entries.map( brew => {
+    //   let { id, name, description, images = {}, website } = brew;
+    //   return (
+    //     <Grid.Column computer={8} tablet={16} mobile={16} key={id}>
+    // ^^^^^^^^^^^^^^^ from dave's slack
 
     // if(is_organic)
     //   visible = breweries.filter( brewery => brewery.is_organic === is_organic)
@@ -45,19 +35,45 @@ class Breweries extends Component {
     //   }
     // }
 
-    return visible.map( brewery => {
+    let ready = [];
+    ready = visible.map( function(brewery)
+      { if (typeof brewery.images != 'undefined'){
+          console.log('got images'); // no need for second-level check; whenever we get images, we get a square_medium
+          return brewery;
+        } else {
+          brewery['images'] = {"square_medium": "http://surlybrewing.com/content/uploads/2014/09/surly-old-brewery-picture.jpg"};
+          return brewery;
+        }
+      }
+    )
+
+    return ready.map( brewery => {
+      // if (typeof brewery.images != 'undefined'){
+      //   console.log('got images'); // no need for second-level check; whenever we get images, we get a square_medium
+      // } else {
+      //   brewery[images] = {"square_medium": "http://surlybrewing.com/content/uploads/2014/09/surly-old-brewery-picture.jpg"};
+      // }
+      // console.log(brewery.images.square_medium);
+      let { id, name, description, is_organic, images = {}, website } = brewery;
+
       return(
         <Grid.Column key={brewery.id} computer={4} mobile={16} tablet={16}>
           <Card style={styles.breweryCard}>
-            {/* <Image fluid={true} src={brewery.logo} /> */}
+            <Image fluid={true} src={brewery.images.square_medium} />
             <Card.Content>
               <Card.Header>{brewery.name}</Card.Header>
-              <Card.Meta>
-                <span>some stuff</span>
-              </Card.Meta>
-              <Card.Description style={styles.breweryDesc}>
-                {brewery.description}
+              <Card.Description>
+                <LinesEllipsis
+                  text={brewery.description}
+                  maxLine='8'
+                  ellipsis='...'
+                  trimRight
+                  basedOn='letters'
+                />
               </Card.Description>
+              <Card.Meta>
+                <span>{brewery.website}</span>
+              </Card.Meta>
             </Card.Content>
             <Card.Content extra>
               <Link to={`/all_breweries/${brewery.id}`}>View Brewery</Link>
@@ -72,13 +88,10 @@ class Breweries extends Component {
     // let { category } = this.state;
     return(
       <Container>
-        <Header as='h3' textAlign='center'>Exceptional Breweries</Header>
+        <Header as='h1' textAlign='center' style={styles.h1}>Exceptional Breweries</Header>
         {/* <Dropdown
-          placeholder='Filter Apps By Category'
-          fluid
-          selection
-          options={this.categoryOptions()}
-          value={category}
+          placeholder='Filter Apps By Category' fluid selection
+          options={this.categoryOptions()} value={category}
           onChange={ (e, data) => this.setState({ category: data.value })}
         /> */}
         {/* { category && <Button fluid basic onClick={this.clearFilter}>Clear Filter</Button> } */}
@@ -91,51 +104,7 @@ class Breweries extends Component {
     )
   }
 
-  // render(){
-  //   let loaded = this.state.loaded;
-  //
-  //   if(loaded){
-  //     return(
-  //       <div>
-  //         {/* <p>{ this.getBreweryImages() }</p> */}
-  //         <p> In Main Return of Breweries.js </p>
-  //       </div>
-  //     )
-  //   } else {
-  //     return(
-  //       <div>
-  //         <h1>Loading...</h1>
-  //       </div>
-  //     )
-  //   }
-  // }
 
-  //     let listLength = this.state.breweries.length;
-  //
-  //     let breweriesArr = []; // will be array of objects
-  //     let breweryImageArr = []; // will be array of objects
-  //     let breweryImageMed = ""; // will be a url
-  //     let breweryImages = {}; // will be object of all image sizes
-  //
-  //     for(let i=0; i<listLength; i++){
-  //       let brewery = this.state.breweries[i]; // gets big fat brewery object
-  //       breweriesArr[i] = brewery; // puts big fat object in array
-  //
-  //       if (typeof this.state.breweries[i].images != 'undefined') {
-  //         breweryImages = this.state.breweries[i].images; // usually gets object, protecting against undefined
-  //       } else {
-  //         breweryImages = { "medium": "http://surlybrewing.com/content/uploads/2014/09/surly-old-brewery-picture.jpg"};
-  //       }
-  //
-  //       breweryImageArr[i] = breweryImages; // object into array
-  //       console.log(`Brewery Image From Array: ${breweryImageArr[i].medium}`) // fuggyeah
-  //     }
-  //     console.log('vvvv breweryImageArr vvvv');
-  //     console.log(breweryImageArr); // an array of objects
-  //     console.log('do i have a breweries in state?');
-  //     console.log(this.state.breweries); // yep, as expected
-  //     console.log('do ia have a breweryImages in state?')
-  //     console.log(this.state.breweryImages); // nope
   //
   //     return(
   //       <Container>
@@ -154,14 +123,14 @@ class Breweries extends Component {
   //                           { brewery.name }
   //                         </Card.Header>
   //                         <Card.Meta>{ brewery.website }</Card.Meta>
-  //                         <Card.Description>
-  //                           <LinesEllipsis
-  //                             text={ brewery.description }
-  //                             maxLine='8'
-  //                             ellipsis='...'
-  //                             trimRight
-  //                             basedOn='letters'
-  //                           />
+                          // <Card.Description>
+                          //   <LinesEllipsis
+                          //     text={ brewery.description }
+                          //     maxLine='8'
+                          //     ellipsis='...'
+                          //     trimRight
+                          //     basedOn='letters'
+                          //   />
   //                         </Card.Description>
   //                       </Card.Content>
   //                     </Card>
@@ -173,14 +142,7 @@ class Breweries extends Component {
   //         </Grid>
   //       </Container>
   //     )
-  //   } else {
-  //     return(
-  //       <div>
-  //         <h1>Loading...</h1>
-  //       </div>
-  //     )
-  //   }
-  // }
+
 }
 
 const styles = {
@@ -192,18 +154,25 @@ const styles = {
     fontSize: 32,
     paddingTop: 15,
   },
+  h1: {
+    color: '#FFF',
+    paddingTop: '30px',
+    paddingBottom: '30px',
+    fontSize: '2.5em',
+  },
   H4: {
-    color: '#FFFFFF',
+    color: '#FFF',
   },
   header4: {
     color: '#333',
   },
   breweryCard: {
     height: '300px',
-    marginBottom: '10px'
+    marginBottom: '10px',
   },
   breweryDesc: {
-    lineHeight: 5,
+    lineHeight: 1.5,
+
   }
 }
 
