@@ -7,22 +7,16 @@ import { getBreweries } from '../actions/breweries';
 import { Container, Header, Segment, Divider,
   Grid, Image, Card, Dimmer, Loader } from 'semantic-ui-react';
 
-class GetBreweries extends React.Component {
+class GetBeers extends React.Component {
   state = { loaded: false };
 
   componentDidMount() {
-    this.props.dispatch(getBreweries(this.setLoaded))
+    this.props.dispatch(getBeers(this.setLoaded))
   }
 
   setLoaded = () => {
     this.setState({ loaded: true });
   }
-
-  // getBreweryImages = () => {
-  //   return this.props.breweries.map( (entries)  => {
-  //     return [entries]
-  //   })
-  // }
 
   render(){
     let { loaded } = this.state;
@@ -31,8 +25,8 @@ class GetBreweries extends React.Component {
         <div>
           {/* <h1> In Main Return in GetBreweries </h1>
           <h1> --------- </h1> */}
-          <Route exact path="/breweries" component={Breweries} />
-          {/* <Route exact path="/brewery/:name" component={Breweries} /> */}
+          <Route exact path="/beers" component={Beers} />
+          {/* <Route exact path="/beer/:name" component={Beers} /> */}
         </div>
       )
     } else {
@@ -47,4 +41,4 @@ class GetBreweries extends React.Component {
   }
 }
 
-export default connect()(GetBreweries);
+export default connect()(GetBeers);
