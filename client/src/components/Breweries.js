@@ -26,8 +26,8 @@ class Breweries extends Component {
     const { is_organic } = this.state;
     console.log(`breweriesParent: ${breweriesParent}`);
 
-    let breweries = [];
-    breweries = breweriesParent.entries;
+    let breweries = breweriesParent.entries || [];  
+    // breweries = breweriesParent.entries;
     console.log(`breweries: ${ breweries }`);
 
     let visible = breweries;
