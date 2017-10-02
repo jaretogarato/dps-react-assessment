@@ -18,3 +18,5 @@ const breweries = (state = [], action) => {
 }
 
 export default breweries;
+
+// ----------- pre-pagination code ----------------

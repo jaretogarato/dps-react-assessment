@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { getBreweries } from '../actions/breweries';
-import { Container, Header, Segment, Divider, Grid, Image, Card } from 'semantic-ui-react';
+import axios from 'axios';
+import { Container, Header, Segment, Divider, Grid, Image, Card, List, Loader } from 'semantic-ui-react';
 import LinesEllipsis from 'react-lines-ellipsis';
+import InfiniteScroll from 'react-infinite-scroller';
 
 class Breweries extends Component {
-  state = { is_organic: '' };
+  state = { is_organic: '', breweries: [], page: 1, totalPages: 0 };
+
+  // loadMore = () => {
+  //   const page = this.state.page + 1;
+  //   axios.get(`/api/breweries?page=${page}`)
+  //     .then( ({ data }) => {
+  //       this.setState( state => {
+  //         return { breweries: [...state.breweries, ...data.breweries], page: state.page + 1 }
+  //       })
+  //       this.props.dispatch({ type: 'BREWERIES', breweries });
+  //     })
+  // }
 
   breweries = () => {
     const { breweries = {} } = this.props;
@@ -67,7 +79,7 @@ class Breweries extends Component {
   }
 
   render() {
-    // let { is_organic } = this.state;
+    let { is_organic, breweries, page, totalPages } = this.state;
     return(
       <Container>
         <Header as='h1' textAlign='center' style={styles.h1}>Exceptional Breweries</Header>
@@ -77,11 +89,24 @@ class Breweries extends Component {
           onChange={ (e, data) => this.setState({ category: data.value })}
         /> */}
         {/* { category && <Button fluid basic onClick={this.clearFilter}>Clear Filter</Button> } */}
-        <Grid columns={16}>
-          <Grid.Row>
-            { this.breweries() }
-          </Grid.Row>
-        </Grid>
+
+        {/* <List divided style={styles.scroller}>
+          <InfiniteScroll
+            pageStart={page}
+            loadMore={this.loadMore}
+            hasMore={page < totalPages}
+            loader={<Loader />}
+            useWindow={false}
+          > */}
+
+            <Grid columns={16}>
+              <Grid.Row>
+                { this.breweries() }
+              </Grid.Row>
+            </Grid>
+
+          {/* </InfiniteScroll>
+        </List> */}
       </Container>
     )
   }
@@ -138,6 +163,10 @@ const styles = {
   cardMeta: {
     color: '#eb2f00',
   },
+  scroller: {
+    height: '60vh',
+    overflow: 'auto',
+   },
 }
 
 const mapStateToProps = (state) => {
