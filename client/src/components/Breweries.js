@@ -9,6 +9,28 @@ import InfiniteScroll from 'react-infinite-scroller';
 class Breweries extends Component {
   state = { is_organic: '', breweries: [], page: 1, totalPages: 0 };
 
+  // ---------- for pagination ---------------
+  // componentDidMount() {
+  // axios.get('/api/all_breweries')
+  //   .then( res => {
+  //     const { data: { breweries, total_pages } } = res;
+  //     this.setState({ breweries, totalPages: total_pages });
+  //     this.props.dispatch({ type: "BREWERIES", breweries });
+  //   })
+  // }
+
+  // -------- for pagination -------------------
+  // loadMore = () => {
+  //   const page = this.state.page + 1;
+  //   axios.get(`/api/scores?page=${page}`)
+  //     .then( ({data, headers} ) => {
+  //       this.setState( state => {
+  //         return { scores: [...state.scores, ...data.scores], page }
+  //       })
+  //       this.props.dispatch({ type: 'HEADERS', headers });
+  //     });
+  // }
+
   // loadMore = () => {
   //   const page = this.state.page + 1;
   //   axios.get(`/api/breweries?page=${page}`)

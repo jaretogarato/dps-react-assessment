@@ -27,7 +27,7 @@ export const getBreweries = (callback) => {
 //   }
 // }
 
-// ------------ from lecture --------------
+// ------------ from yahtzee lecture --------------
 // componentDidMount() {
 //     axios.get(`/api/scores?page=${this.state.page}`)
 //       .then( ({ data, headers }) => {
